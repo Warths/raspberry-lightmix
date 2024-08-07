@@ -1,13 +1,10 @@
 export class App {
     tickable = new Tickable()
 
-    constructor() {}
-
     init() {
         this.tickable
         .setTickRate(60)
         .addFunction(() => this.sayHello())
-
     }
 
     run() {
