@@ -67,7 +67,6 @@ export class App {
     sayHello() {
         this.lightMix.updateState(Date.now())
         this.lightMix.getState()
-        console.log("tick..")
     }
 
 
