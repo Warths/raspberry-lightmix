@@ -1,5 +1,36 @@
+import { Channel } from "./channel"
+import { Fixture } from "./fixture"
+import { LightMix } from "./lightmix"
+
 export class App {
     tickable = new Tickable()
+
+    lightMix = new LightMix(
+        {
+            "1": new Fixture(
+                {
+                    "r": new Channel(0),
+                    "g": new Channel(0),
+                    "b": new Channel(0),
+                    "w": new Channel(0),
+                    "t": new Channel(100),
+                    "uv": new Channel(0),
+                    "pow": new Channel(100)
+                }
+            ),
+            "2": new Fixture(
+                {
+                    "r": new Channel(0),
+                    "g": new Channel(0),
+                    "b": new Channel(0),
+                    "w": new Channel(0),
+                    "t": new Channel(100),
+                    "uv": new Channel(0),
+                    "pow": new Channel(100)
+                }
+            )
+        }
+    )
 
     init() {
         this.tickable
@@ -12,7 +43,7 @@ export class App {
     }
 
     sayHello() {
-        console.log("Hello")
+        console.log(this.lightMix.getState())
     }
 
 
