@@ -1,7 +1,9 @@
-// app.ts
-function mainLoop() {
-    console.log("The application is running. Timestamp:", new Date().toISOString());
+import { App } from './classes/app'
+
+function bootstrap() {
+    const app = new App()
+    app.init()
+    app.run()
 }
 
-// Set an interval to run the mainLoop function every 1000 milliseconds (1 second)
-setInterval(mainLoop, 1000);
+bootstrap()
