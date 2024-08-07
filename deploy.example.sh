@@ -44,7 +44,7 @@ if [ "$REMOTE_COMMIT" != "$LOCAL_COMMIT" ]; then
   npm run build
 
   # Restart the application with PM2
-  pm2 restart Lightmix
+  pm2 restart index
 
   echo "Deployment completed."
 else
