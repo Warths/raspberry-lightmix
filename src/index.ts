@@ -1,4 +1,4 @@
-import { App } from './classes/lightmix/app'
+import { App } from './classes/app'
 
 function bootstrap() {
     const app = new App()

@@ -1,6 +1,6 @@
-import { Channel } from "./channel"
-import { Fixture } from "./fixture"
-import { LightMix } from "./lightmix"
+import { Channel } from "./lightmix/channel"
+import { Fixture } from "./lightmix/fixture"
+import { LightMix } from "./lightmix/lightmix"
 
 export class App {
     tickable = new Tickable()
