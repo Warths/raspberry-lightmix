@@ -18,4 +18,11 @@ export class Fixture {
         }
         return state
     }
+
+    updateState(time: number) {
+        for (const channel of Object.values(this.channels)) {
+            channel.updateState(time)
+        }
+
+    }
 }

@@ -28,6 +28,28 @@ export class App {
                     "uv": new Channel(0),
                     "pow": new Channel(100)
                 }
+            ),
+            "3": new Fixture(
+                {
+                    "r": new Channel(0),
+                    "g": new Channel(0),
+                    "b": new Channel(0),
+                    "w": new Channel(0),
+                    "t": new Channel(100),
+                    "uv": new Channel(0),
+                    "pow": new Channel(100)
+                }
+            ),
+            "4": new Fixture(
+                {
+                    "r": new Channel(0),
+                    "g": new Channel(0),
+                    "b": new Channel(0),
+                    "w": new Channel(0),
+                    "t": new Channel(100),
+                    "uv": new Channel(0),
+                    "pow": new Channel(100)
+                }
             )
         }
     )
@@ -43,7 +65,9 @@ export class App {
     }
 
     sayHello() {
-        console.log(this.lightMix.getState())
+        this.lightMix.updateState(Date.now())
+        this.lightMix.getState()
+        console.log("tick..")
     }
 
 

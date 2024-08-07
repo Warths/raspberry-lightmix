@@ -13,4 +13,9 @@ export class LightMix {
         return state
     }
     
+    updateState(time: number): void {
+        for (const fixture of Object.values(this.fixtures)) {
+            fixture.updateState(time)
+        }
+    }
 }
