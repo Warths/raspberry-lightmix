@@ -1,9 +1,8 @@
 import { Event } from "./event"
+import { ChannelEvent } from "./lightmix.types"
 
 export class Channel {
-    private events:  Event[] = [
-        new Event(0, 100, 0, 100000)
-    ]
+    private events:  Event[] = []
     
     constructor(
         private state: number = 0
@@ -68,5 +67,16 @@ export class Channel {
 
     clear() {
         this.events = []
+    }
+
+    addEvent(event: ChannelEvent) {
+        const eventInstance = new Event(
+            event.startValue ?? null, 
+            event.endValue ?? null,
+            event.startTime ?? null, 
+            event.duration ?? null
+        )
+        this.events.push(eventInstance)
+
     }
 }

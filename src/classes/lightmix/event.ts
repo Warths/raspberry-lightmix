@@ -59,13 +59,13 @@ export class Event {
         }
 
 
+
         if (this.startTime + this.duration < time) {
             this.ended = true
             return this.endValue
         }
 
-        const progress = Math.max(0, Math.min(1, (time - this.startTime) / this.duration))
-        
+        const progress = Math.max(0, Math.min(1, (time - this.startTime) / this.duration))       
         const interpolatedProgress = this.quadraticInterpolation(progress)
 
         return (this.endValue - this.startValue) * interpolatedProgress + this.startValue

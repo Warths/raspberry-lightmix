@@ -1,4 +1,5 @@
 import { Channel } from "./channel";
+import { FixtureEvent } from "./lightmix.types";
 import { FixtureState } from "./types";
 
 
@@ -46,5 +47,13 @@ export class Fixture {
         for (const channel of Object.values(this.channels)) {
             channel.clear()
         }
+    }
+
+    addEvent(event: FixtureEvent) {
+        const channel = this.getChannel(event.channel)
+        if (!channel) {
+            return
+        }
+        channel.addEvent(event)
     }
 }

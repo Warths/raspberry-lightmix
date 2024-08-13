@@ -1,4 +1,5 @@
 import { Fixture } from "./fixture";
+import { LightmixEvent } from "./lightmix.types";
 import { LightMixState } from "./types";
 
 
@@ -74,6 +75,14 @@ export class LightMix {
         for(const fixture of Object.values(this.fixtures)) {
             fixture.clear()
         }    
+    }
+
+    addEvent(event: LightmixEvent) {
+        const fixture = this.getFixture(event.fixture)
+        if (!fixture) {
+            return 
+        }
+        fixture.addEvent(event)
     }
 
 }
