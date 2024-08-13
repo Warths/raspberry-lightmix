@@ -2,7 +2,7 @@ import { Event } from "./event"
 
 export class Channel {
     private events:  Event[] = [
-        new Event(100, 0, null, 10000)
+        new Event(0, 100, 0, 100000)
     ]
     
     constructor(
@@ -11,6 +11,11 @@ export class Channel {
 
     getState() {
         return this.state
+    }
+
+    setState(value: number) {
+        this.state = value
+
     }
 
     updateState(time: number) {
@@ -50,6 +55,12 @@ export class Channel {
         }
 
         return earliestEvent;
+    }
+
+    applyTimeDelta(delta: number) {
+        for (const event of this.events) {
+            event.applyTimeDelta(delta)
+        }
     }
 
     removeEvent(eventToRemove: Event): void {

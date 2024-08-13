@@ -11,6 +11,10 @@ export class Fixture {
         this.channels[channelId] = new Channel(initialValue)
     }
 
+    getChannel(channelName: string) {
+        return this.channels[channelName]
+    }
+
     getState() {
         const state: FixtureState = {} 
         for (const [key, value] of Object.entries(this.channels)) {
@@ -19,10 +23,22 @@ export class Fixture {
         return state
     }
 
+    setState(channelName: string, value: number) {
+        const channel = this.getChannel(channelName)
+        if (channel) {
+            channel.setState(value)
+        }
+    }
+
     updateState(time: number) {
         for (const channel of Object.values(this.channels)) {
             channel.updateState(time)
         }
+    }
 
+    applyTimeDelta(delta: number) {
+        for (const channel of Object.values(this.channels)) {
+            channel.applyTimeDelta(delta)
+        }
     }
 }

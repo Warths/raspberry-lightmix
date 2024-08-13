@@ -84,4 +84,9 @@ export class Event {
         return this.startTime
     }
 
+    applyTimeDelta(delta: number) {
+        if (this.startTime !== null) {
+            this.startTime -= delta
+        }
+    }
 }
