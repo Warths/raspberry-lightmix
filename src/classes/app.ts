@@ -60,6 +60,7 @@ export class App {
         this.tickable.setTickRate(1).addFunction(() => this.sayHello())
 
         this.server.post("/calibrate", this.calibrate.bind(this))
+        this.server.post("/clear", this.clear.bind(this))
 
         this.server.listen(3000, () => {
             console.log('Server is running on port 3000');
@@ -87,7 +88,6 @@ export class App {
     calibrate(req: Request, res: Response) {
         const body = req.body
         
-
         if (typeof body == "object" && body.hostTime && typeof body.hostTime == "number") {
             this.lightMix.calibrate(body.hostTime)
             res.status(200).json({status: 200, message:"ok"})
@@ -95,6 +95,14 @@ export class App {
             res.status(400).json({status: 400, message:"Bad request"})
         }
 
+    }
+
+    clear(req: Request, res: Response) {
+        const body = req.body
+
+        this.lightMix.clear()
+
+        res.status(200).json({status: 200, message:"ok"})
     }
 
 }

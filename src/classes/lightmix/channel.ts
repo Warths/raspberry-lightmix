@@ -35,7 +35,6 @@ export class Channel {
         if  (currentEvent.isEnded()) {
             this.removeEvent(currentEvent)
         }
-
         
     }
 
@@ -65,5 +64,9 @@ export class Channel {
 
     removeEvent(eventToRemove: Event): void {
         this.events = this.events.filter(event => event !== eventToRemove);
-    } 
+    }
+
+    clear() {
+        this.events = []
+    }
 }

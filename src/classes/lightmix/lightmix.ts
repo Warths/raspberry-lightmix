@@ -68,10 +68,12 @@ export class LightMix {
         for(const fixture of Object.values(this.fixtures)) {
             fixture.applyTimeDelta(delta)
         }
-
-
-
     }
 
+    clear() {
+        for(const fixture of Object.values(this.fixtures)) {
+            fixture.clear()
+        }    
+    }
 
 }

@@ -41,4 +41,10 @@ export class Fixture {
             channel.applyTimeDelta(delta)
         }
     }
+
+    clear() {
+        for (const channel of Object.values(this.channels)) {
+            channel.clear()
+        }
+    }
 }
