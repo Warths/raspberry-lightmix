@@ -5,7 +5,8 @@ import { LightmixEvent } from "./lightmix/lightmix.types"
 import { Tickable } from "./scheduler/tickable"
 import express, {Response, Request} from "express"
 
-
+import { i2c } from "./i2c/i2c"
+import { RGBWYV } from "./peripherals/RGBWYV"
 
 export class App {
     tickable = new Tickable()
@@ -14,7 +15,9 @@ export class App {
     lightMix: LightMix
     
     server: express.Application
-    
+
+    peripheral: RGBWYV
+    i2c = i2c 
     constructor() {
         this.lightMix = new LightMix(
             {
@@ -54,6 +57,9 @@ export class App {
             }
         )
 
+        this.peripheral = new RGBWYV(this.i2c, 0x01, this.lightMix.getFixture("1"))
+        
+
         this.server = express()
         this.server.use(express.json())
     }
@@ -69,6 +75,8 @@ export class App {
         this.server.listen(3000, () => {
             console.log('Server is running on port 3000');
         })
+
+        console.log(this.i2c.scanSync())
     }
 
     run() {
@@ -83,6 +91,8 @@ export class App {
         this.lightMix.setAll("clock", () => this.frame % 2)
 
         this.lightMix.updateState(Date.now())
+
+        this.peripheral.writeState()
 
         this.frame++
     }
@@ -159,5 +169,4 @@ export class App {
     success(res: Response) {
         res.status(200).json({status: 200, message:"ok"})
     }
-
 }

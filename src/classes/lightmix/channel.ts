@@ -1,6 +1,7 @@
 import { Event } from "./event"
 import { ChannelEvent } from "./lightmix.types"
 
+
 export class Channel {
     private events:  Event[] = []
     

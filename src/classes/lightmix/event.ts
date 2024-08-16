@@ -1,5 +1,4 @@
 import { Channel } from "./channel";
-import { Fixture } from "./fixture";
 
 export class Event {
     private initialized = false;
