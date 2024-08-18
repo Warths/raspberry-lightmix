@@ -12,20 +12,20 @@ class I2C {
         }
 
         this.memory[address][command] = byte;
-        console.log(
-            `Mock: Wrote byte 0x${byte.toString(16)} to command 0x${command.toString(
-                16
-            )} at address 0x${address.toString(16)} on bus ${this.bus}`
-        );
+        // console.log(
+        //     `Mock: Wrote byte 0x${byte.toString(16)} to command 0x${command.toString(
+        //         16
+        //     )} at address 0x${address.toString(16)} on bus ${this.bus}`
+        // );
     }
 
     readByteSync(address: number, command: number): number {
         const byte = this.memory[address]?.[command] ?? 0;
-        console.log(
-            `Mock: Read byte 0x${byte.toString(16)} from command 0x${command.toString(
-                16
-            )} at address 0x${address.toString(16)} on bus ${this.bus}`
-        );
+        // console.log(
+        //     `Mock: Read byte 0x${byte.toString(16)} from command 0x${command.toString(
+        //         16
+        //     )} at address 0x${address.toString(16)} on bus ${this.bus}`
+        // );
         return byte;
     }
 

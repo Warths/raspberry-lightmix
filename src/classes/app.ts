@@ -66,7 +66,7 @@ export class App {
 
 
     init() {
-        this.tickable.setTickRate(60).addFunction(() => this.sayHello())
+        this.tickable.setTickRate(1).addFunction(() => this.sayHello())
 
         this.server.post("/calibrate", this.calibrate.bind(this))
         this.server.post("/clear", this.clear.bind(this))
