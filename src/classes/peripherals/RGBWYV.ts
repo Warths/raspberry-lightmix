@@ -11,6 +11,6 @@ export class RGBWYV {
         this.fixture.getState()
         const state = (Math.random() * 255).toFixed(0)
         console.log(state)
-        this.i2cBus.writeByteSync(this.address, 0x00, state)
+        this.i2cBus.writeByteSync(this.address, 0x00, 0x10)
     }
 }
