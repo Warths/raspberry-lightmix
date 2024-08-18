@@ -15,6 +15,6 @@ export class RGBWYV {
 
     writeState() {
         this.fixture.getState()
-        spawn("i2cset -y 1 0x10 0xff 0xff i")
+        spawn("/usr/sbin/i2cset -y 1 0x10 0xff 0xff i")
     }
 }
