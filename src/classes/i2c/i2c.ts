@@ -33,8 +33,9 @@ class I2C {
 try {
     console.log("HEY")
     const i2cBus = require('i2c-bus');
-    const i2c = i2cBus.openSync(1);
-    i2c.i2cWriteSync(0x10, 2, Buffer.from([255, 255]))
+    i2c = i2cBus.openSync(1);
+    const no = Math.round((Math.random() * 255))
+    i2c.i2cWriteSync(0x10, 2, Buffer.from([255, no]))
 } catch (error: any) {
     i2c = I2C.openSync(1)
 }
