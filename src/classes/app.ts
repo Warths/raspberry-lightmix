@@ -19,7 +19,7 @@ export class App {
     peripheral: RGBWYV
 
     i2c = i2cFactory(1)
-    
+
     constructor() {
         this.lightMix = new LightMix(
             {
@@ -59,7 +59,7 @@ export class App {
             }
         )
 
-        this.peripheral = new RGBWYV(this.i2c, 0x01, this.lightMix.getFixture("1"))
+        this.peripheral = new RGBWYV(this.i2c, 0x10, this.lightMix.getFixture("1"))
         
 
         this.server = express()
