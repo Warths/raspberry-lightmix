@@ -12,6 +12,6 @@ export class RGBWYV {
     writeState() {
         this.fixture.getState()
         const random = Math.floor(Math.random() * 255)
-        this.i2cBus.i2cWriteSync(this.address, 2, Buffer.from([random, random]))
+        this.i2cBus.i2cWriteSync(this.address, 2, Buffer.from([0, random]))
     }
 }
