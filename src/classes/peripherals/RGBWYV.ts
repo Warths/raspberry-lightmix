@@ -1,8 +1,7 @@
 import { Fixture } from "../lightmix/fixture";
 
 
-const { spawn } = require('child_process')
-
+import { i2c } from "../i2c/i2c";
 
 export class RGBWYV {
 
@@ -15,6 +14,6 @@ export class RGBWYV {
 
     writeState() {
         this.fixture.getState()
-        spawn("/usr/sbin/i2cset -y 1 0x10 0xff 0xff i")
+        i2c.writeByteSync(this.address, 2, Buffer.from([128, 128]))
     }
 }
