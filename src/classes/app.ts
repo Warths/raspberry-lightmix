@@ -5,7 +5,7 @@ import { LightmixEvent } from "./lightmix/lightmix.types"
 import { Tickable } from "./scheduler/tickable"
 import express, {Response, Request} from "express"
 
-import { i2c } from "./i2c/i2c"
+import { i2cFactory } from "./i2c/i2c"
 import { RGBWYV } from "./peripherals/RGBWYV"
 
 export class App {
@@ -17,7 +17,9 @@ export class App {
     server: express.Application
 
     peripheral: RGBWYV
-    i2c = i2c 
+
+    i2c = i2cFactory(1)
+    
     constructor() {
         this.lightMix = new LightMix(
             {

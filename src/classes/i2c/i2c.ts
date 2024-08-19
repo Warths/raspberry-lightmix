@@ -1,4 +1,4 @@
-export var i2c: I2C;
+import { execPath } from "process";
 
 class I2C {
     private memory: { [address: number]: number[] } = {};
@@ -30,15 +30,17 @@ class I2C {
     }
 }
 
-try {
-    console.log("HEY")
-    const i2cBus = require('i2c-bus');
-    i2c = i2cBus.openSync(1);
-    const no = Math.round((Math.random() * 255))
-    i2c.i2cWriteSync(0x10, 2, Buffer.from([255, no]))
-} catch (error: any) {
-    i2c = I2C.openSync(1)
+export var i2cFactory: (no: number) => I2C = (no: number) => {
+    try {
+        const i2cBus = require('i2c-bus');
+        const i2c = i2cBus.openSync(no);
+        i2c.i2cWriteSync(0x10, 2, Buffer.from([255, no]))
+        return i2c
+    } catch (error: any) {
+        return I2C.openSync(no)
+    }
 }
+ 
 
 
 
