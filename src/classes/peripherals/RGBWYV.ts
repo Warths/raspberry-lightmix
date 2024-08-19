@@ -1,8 +1,5 @@
 import { Fixture } from "../lightmix/fixture";
 
-
-import { i2c } from "../i2c/i2c";
-
 export class RGBWYV {
 
     constructor(
@@ -14,6 +11,6 @@ export class RGBWYV {
 
     writeState() {
         this.fixture.getState()
-        i2c.i2cWriteSync(this.address, 2, Buffer.from([128, 128]))
+        this.i2cBus.i2cWriteSync(this.address, 2, Buffer.from([128, 128]))
     }
 }
