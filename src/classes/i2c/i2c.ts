@@ -6,7 +6,7 @@ class I2C {
 
     constructor(private bus: number) {}
 
-    writeByteSync(address: number, lengths: number, byte: Buffer) {
+    i2cWriteSync(address: number, length: number, byte: Buffer) {
         if (!this.memory[address]) {
             this.memory[address] = [];
         }

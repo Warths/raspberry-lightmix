@@ -14,6 +14,6 @@ export class RGBWYV {
 
     writeState() {
         this.fixture.getState()
-        i2c.writeByteSync(this.address, 2, Buffer.from([128, 128]))
+        i2c.i2cWriteSync(this.address, 2, Buffer.from([128, 128]))
     }
 }
