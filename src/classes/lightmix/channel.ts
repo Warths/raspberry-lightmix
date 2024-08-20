@@ -3,7 +3,9 @@ import { ChannelEvent } from "./lightmix.types"
 
 
 export class Channel {
-    private events:  Event[] = []
+    private events:  Event[] = [
+        new Event(0, 255, null, 10000)
+    ]
     
     constructor(
         private state: number = 0
