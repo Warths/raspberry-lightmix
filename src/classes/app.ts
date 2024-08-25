@@ -1,12 +1,12 @@
 import { Channel } from "./lightmix/channel"
-import { Fixture } from "./lightmix/fixture"
+import { Fixture } from "./lightmix/peripherals/fixture"
 import { LightMix } from "./lightmix/lightmix"
 import { LightmixEvent } from "./lightmix/lightmix.types"
 import { Tickable } from "./scheduler/tickable"
 import express, {Response, Request} from "express"
 
 import { i2cFactory } from "./i2c/i2c"
-import { RGBWYV } from "./peripherals/RGBWYV"
+import { RGBWYV } from "./lightmix/peripherals/RGBWYV"
 
 export class App {
     tickable = new Tickable()
@@ -16,50 +16,14 @@ export class App {
     
     server: express.Application
 
-    peripheral: RGBWYV
-
-    i2c = i2cFactory(1)
-
     constructor() {
         this.lightMix = new LightMix(
+            i2cFactory(1),
             {
-                "1": new Fixture(
-                    {
-                        "red": new Channel(0),
-                        "green": new Channel(0),
-                        "blue": new Channel(0),
-                        "white": new Channel(0),
-                        "uv": new Channel(0),
-                        "red2": new Channel(0),
-                        "green2": new Channel(0),
-                        "blue2": new Channel(0),
-                        "white2": new Channel(0),
-                        "uv2": new Channel(0),
-                        "temperature": new Channel(100),
-                        "power": new Channel(100),
-                        "pan": new Channel(0),
-                        "tilt": new Channel(0),
-                        "wave_shared_rng": new Channel(0),
-                        "wave_shared_trough_min_duration": new Channel(0),
-                        "wave_shared_trough_max_duration": new Channel(0),
-                        "wave_shared_crest_min_duration": new Channel(0),
-                        "wave_shared_crest_max_duration": new Channel(0),
-                        "wave_shared_transition_max_duration": new Channel(0),
-                        "wave_shared_transition_min_duration": new Channel(0),
-                        "wave_dedicated_rng": new Channel(0),
-                        "wave_dedicated_trough_min_duration": new Channel(0),
-                        "wave_dedicated_trough_max_duration": new Channel(0),
-                        "wave_dedicated_crest_min_duration": new Channel(0),
-                        "wave_dedicated_crest_max_duration": new Channel(0),
-                        "wave_dedicated_transition_max_duration": new Channel(0),
-                        "wave_dedicated_transition_min_duration": new Channel(0),
-                        "clock": new Channel(0)
-                    }
-                )
+                "1": new RGBWYV(0x10),
+                "2": new RGBWYV(0x11)
             }
         )
-
-        this.peripheral = new RGBWYV(this.i2c, 0x10, this.lightMix.getFixture("1"))
         
 
         this.server = express()
@@ -77,8 +41,6 @@ export class App {
         this.server.listen(3000, () => {
             console.log('Server is running on port 3000');
         })
-
-        console.log(this.i2c.scanSync())
     }
 
     run() {
@@ -88,13 +50,13 @@ export class App {
     sayHello() {
         const sharedRng = Math.random() * 100
 
-        this.lightMix.setAll("wave_shared_rng", () => sharedRng)
-        this.lightMix.setAll("wave_dedicated_rng", () => Math.random() * 100)
+        this.lightMix.setAll("shared_rng", () => sharedRng)
+        this.lightMix.setAll("dedicated_rng", () => Math.random() * 100)
         this.lightMix.setAll("clock", () => this.frame % 2)
 
         this.lightMix.updateState(Date.now())
 
-        this.peripheral.writeState()
+        this.lightMix.writeState()
 
         this.frame++
     }

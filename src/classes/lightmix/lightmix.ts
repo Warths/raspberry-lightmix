@@ -1,13 +1,14 @@
-import { Fixture } from "./fixture";
+import { Fixture } from "./peripherals/fixture";
 import { LightmixEvent } from "./lightmix.types";
 import { LightMixState } from "./types";
+import { I2C } from "../i2c/i2c";
 
 
 export class LightMix {
 
     timeOffset = Date.now()
 
-    constructor(private fixtures: Record<string, Fixture>) {}
+    constructor(private i2c: I2C, private fixtures: Record<string, Fixture>) {}
 
     getState(): LightMixState {
         const state: LightMixState = {} 
@@ -39,6 +40,12 @@ export class LightMix {
         time = time - this.timeOffset
         for (const fixture of Object.values(this.fixtures)) {
             fixture.updateState(time)
+        }
+    }
+
+    writeState(): void {
+        for (const fixture of Object.values(this.fixtures)) {
+            fixture.writeState(this.i2c)
         }
     }
     

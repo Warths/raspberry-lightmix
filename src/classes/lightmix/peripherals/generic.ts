@@ -1,7 +1,6 @@
-import { Fixture } from "../lightmix/fixture";
+import { I2C } from "../../i2c/i2c";
 
-export class i2CPeripheral {
-
+export abstract class i2CPeripheral {
     interpolate(value: number, minValue: number, maxValue: number, newMinValue: number, newMaxValue: number) {
         return newMinValue + (value - minValue) / (maxValue - minValue) * (newMaxValue - newMinValue);
     }
@@ -20,25 +19,6 @@ export class i2CPeripheral {
     
         return [highByte, middleByte, lowByte];
     }
-}
 
-export class RGBWYV extends i2CPeripheral {
-
-    constructor(
-        private i2cBus: any, 
-        private address: number, 
-        private fixture: Fixture
-    ) {
-        super()
-    }
-
-    writeState() {
-
-        const random = Math.floor(Math.random() * 255)
-        
-        const red = this.numberTo2x8Bit(this.interpolate(this.fixture.getChannel('red').getState(), 0x00, 0xFF, 0x00, 0xFFFF))
-
-
-        this.i2cBus.i2cWriteSync(this.address, 2, Buffer.from(red))
-    }
+    writeState(i2c: I2C) {}
 }

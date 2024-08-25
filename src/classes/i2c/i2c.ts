@@ -1,6 +1,6 @@
 import { execPath } from "process";
 
-class I2C {
+export class I2C {
     private memory: { [address: number]: number[] } = {};
     private connectedDevices: Set<number> = new Set();
 

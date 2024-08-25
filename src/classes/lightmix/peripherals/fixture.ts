@@ -1,15 +1,19 @@
-import { Channel } from "./channel";
-import { FixtureEvent } from "./lightmix.types";
-import { FixtureState } from "./types";
+import { Channel } from "../channel";
+import { FixtureEvent } from "../lightmix.types";
+import { i2CPeripheral } from "./generic";
+import { FixtureState } from "../types";
 
 
-export class Fixture {
+export class Fixture extends i2CPeripheral {
     constructor(
         private channels: Record<string, Channel> = {}
-    ) {}
+    ) {
+        super()
+    }
 
     createChannel(channelId: string, initialValue = 0) {
         this.channels[channelId] = new Channel(initialValue)
+        return this
     }
 
     getChannel(channelName: string) {
@@ -55,5 +59,13 @@ export class Fixture {
             return
         }
         channel.addEvent(event)
+    }
+
+    channelValue8bitTo16bit(name: string) {
+        return this.interpolate(this.getChannel(name).getState(), 0, 255, 0, 65535)
+    }
+
+    channelValue8bit(name: string) {
+        return this.interpolate(this.getChannel(name).getState(), 0, 255, 0, 255)
     }
 }

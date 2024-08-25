@@ -3,9 +3,7 @@ import { ChannelEvent } from "./lightmix.types"
 
 
 export class Channel {
-    private events:  Event[] = [
-        new Event(0, 255, null, 10000)
-    ]
+    private events:  Event[] = []
     
     constructor(
         private state: number = 0
@@ -22,12 +20,11 @@ export class Channel {
 
     updateState(time: number) {
         const currentEvent = this.getCurrentEvent()
-
         if (currentEvent === null) {
             return 
         }
 
-        if (currentEvent.isReady()) {
+        if (!currentEvent.isReady()) {
             currentEvent.init(this)
         }
 
