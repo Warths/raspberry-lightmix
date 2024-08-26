@@ -20,8 +20,7 @@ export class App {
         this.lightMix = new LightMix(
             i2cFactory(1),
             {
-                "1": new RGBWYV(0x10),
-                "2": new RGBWYV(0x11)
+                "1": new RGBWYV(0x10)
             }
         )
         
@@ -32,7 +31,7 @@ export class App {
 
 
     init() {
-        this.tickable.setTickRate(1).addFunction(() => this.sayHello())
+        this.tickable.setTickRate(60).addFunction(() => this.sayHello())
 
         this.server.post("/calibrate", this.calibrate.bind(this))
         this.server.post("/clear", this.clear.bind(this))
