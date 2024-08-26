@@ -116,8 +116,6 @@ export class RGBWYV extends Fixture {
         const realWarmWhite = (warmWhite * wave) + (warmWhite2 * (1 - wave))
         const realUv = (uv * wave) + (uv2 * (1 - wave))
 
-        console.log(this.address, realRed)
-
         const redBytes = this.numberTo2x8Bit(this.interpolate(realRed, 0x00, 0xFF, 0x00, 0xFFFF))
         const greenBytes = this.numberTo2x8Bit(this.interpolate(realGreen, 0x00, 0xFF, 0x00, 0xFFFF))
         const blueBytes = this.numberTo2x8Bit(this.interpolate(realBlue, 0x00, 0xFF, 0x00, 0xFFFF))
