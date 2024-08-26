@@ -116,14 +116,13 @@ export class RGBWYV extends Fixture {
         const realWarmWhite = (warmWhite * wave) + (warmWhite2 * (1 - wave))
         const realUv = (uv * wave) + (uv2 * (1 - wave))
 
-        const redBytes = this.numberTo2x8Bit(this.interpolate(realRed, 0x00, 0xFF, 0x00, 0xFFFF))
-        const greenBytes = this.numberTo2x8Bit(this.interpolate(realGreen, 0x00, 0xFF, 0x00, 0xFFFF))
-        const blueBytes = this.numberTo2x8Bit(this.interpolate(realBlue, 0x00, 0xFF, 0x00, 0xFFFF))
-        const coolWhiteBytes = this.numberTo2x8Bit(this.interpolate(realCoolWhite, 0x00, 0xFF, 0x00, 0xFFFF))
-        const warmWhiteBytes = this.numberTo2x8Bit(this.interpolate(realWarmWhite, 0x00, 0xFF, 0x00, 0xFFFF))
-        const uvBytes = this.numberTo2x8Bit(this.interpolate(realUv, 0x00, 0xFF, 0x00, 0xFFFF))
+        const redBytes = this.numberTo2x8Bit(realRed)
+        const greenBytes = this.numberTo2x8Bit(realGreen)
+        const blueBytes = this.numberTo2x8Bit(realBlue)
+        const coolWhiteBytes = this.numberTo2x8Bit(realCoolWhite)
+        const warmWhiteBytes = this.numberTo2x8Bit(realWarmWhite)
+        const uvBytes = this.numberTo2x8Bit(realUv)
 
-        console.log(redBytes)
         const byteArray = [
             ...redBytes,
             ...greenBytes,
