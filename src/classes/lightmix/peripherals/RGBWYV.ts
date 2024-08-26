@@ -48,9 +48,9 @@ export class RGBWYV extends Fixture {
                 "wave_dedicated_through_max_duration": new Channel(500), 
                 "wave_dedicated_crest_min_duration": new Channel(500), 
                 "wave_dedicated_crest_max_duration": new Channel(500), 
-                "wave_dedicated_through_min_value": new Channel(80), 
+                "wave_dedicated_through_min_value": new Channel(100), 
                 "wave_dedicated_through_max_value": new Channel(100), 
-                "wave_dedicated_crest_min_value": new Channel(80), 
+                "wave_dedicated_crest_min_value": new Channel(100), 
                 "wave_dedicated_crest_max_value": new Channel(100), 
                 "wave_dedicated_transition_max_duration": new Channel(500), 
                 "wave_dedicated_transition_min_duration": new Channel(500), 
@@ -123,6 +123,7 @@ export class RGBWYV extends Fixture {
         const warmWhiteBytes = this.numberTo2x8Bit(this.interpolate(realWarmWhite, 0x00, 0xFF, 0x00, 0xFFFF))
         const uvBytes = this.numberTo2x8Bit(this.interpolate(realUv, 0x00, 0xFF, 0x00, 0xFFFF))
 
+        console.log(redBytes)
         const byteArray = [
             ...redBytes,
             ...greenBytes,
